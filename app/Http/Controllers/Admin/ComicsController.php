@@ -10,14 +10,19 @@ class ComicController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * mostra lista fumetti
      */
     public function index()
     {
+       
+        // $comics = Comics::all();
+        //   return view('admin.comics.index', compact('comics'));
         return view('admin.comics.index');
     }
 
     /**
      * Show the form for creating a new resource.
+     * mostra il form per creare un nuovo fumetto
      */
     public function create()
     {
@@ -26,14 +31,16 @@ class ComicController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * memorizza un nuovo fumetto nel database
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
+     * mostra solo un fumetto
      */
     public function show(Comics $comic)
     {
