@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comics;
 use Illuminate\Http\Request;
 
-class ComicController extends Controller
+class ComicsController extends Controller
 {
     /**
      * Display a listing of the resource.
