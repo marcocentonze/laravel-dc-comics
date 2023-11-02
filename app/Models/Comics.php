@@ -13,4 +13,8 @@ class Comics extends Model
         'artists' => 'array',
         'writers' => 'array'
     ];
+
+    // protected $fillable = ['title', 'description', 'price', 'thumb'];
 }
+
+

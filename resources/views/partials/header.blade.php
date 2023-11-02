@@ -2,7 +2,8 @@
     
    
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <a class="navbar-brand" href="#">Negozio di Fumetti</a>
+    <img src="https://w7.pngwing.com/pngs/54/634/png-transparent-san-diego-comic-con-logo-comic-book-comics-fumetteria-book-shop-logo-comics-text-comic-book.png" width="100">
+    <a class="navbar-brand ps-2" href="#">Negozio di Fumetti</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

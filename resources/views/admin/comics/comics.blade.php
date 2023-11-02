@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('title', 'Admin-comics')
 
@@ -12,7 +12,7 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <h4>{{ $comic['title'] }}</h4>
-                            <div class="details d-flex justify-content-between">
+                            <div class="d-flex justify-content-between">
                                 <span>{{ $comic['price'] }}</span>
                                 <span>{{ $comic['series'] }}</span>
                             </div>
@@ -21,7 +21,7 @@
                             <img class="img-fluid" src="{{ $comic['thumb'] }}" alt="">
                         </div>
                         <div class="card-footer">
-                            <div class="details d-flex justify-content-between">
+                            <div class="d-flex justify-content-between">
                                 <span>{{ $comic['sale_date'] }}</span>
                                 <span>{{ $comic['type'] }}</span>
                             </div>
@@ -31,4 +31,4 @@
             @endforeach
         </div>
     </div>
-@endsection
+@endsection --}}
