@@ -13,8 +13,9 @@ class Comics extends Model
         'artists' => 'array',
         'writers' => 'array'
     ];
-
-    // protected $fillable = ['title', 'description', 'price', 'thumb'];
+     
+    //lo richiede perchè ho fatto assegnazione di massa(::all)
+    protected $fillable = ['title', 'description', 'price', 'thumb'];
 }
 
 
