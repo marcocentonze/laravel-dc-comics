@@ -75,24 +75,23 @@ class ComicsController extends Controller
      */
     public function update(Request $request, Comics $comic)
     {
-           //data raccoglie tutti i dati 
-           $data = $request->all();
+        //data raccoglie tutti i dati 
+        $data = $request->all();
 
-           if ($request->has('thumb') && $comic->thumb) {
-   
-               $new_thumb = $request->thumb;
-   
-               Storage::delete($comic['thumb']);
-   
-               $file_path = Storage::put('comics_img', $new_thumb);
-   
-               $data['thumb'] = $file_path;
-           }
-   
-           $comic->update($data);
-   
-           return to_route('comics.show', $comic);
-        
+        if ($request->has('thumb') && $comic->thumb) {
+
+            $new_thumb = $request->thumb;
+
+            Storage::delete($comic['thumb']);
+
+            $file_path = Storage::put('comics_img', $new_thumb);
+
+            $data['thumb'] = $file_path;
+        }
+
+        $comic->update($data);
+
+        return to_route('comics.show', $comic);
     }
 
     /**
@@ -100,6 +99,14 @@ class ComicsController extends Controller
      */
     public function destroy(Comics $comic)
     {
-        //
+
+        // if(!is_null($comic->comics_img)) {
+        //     Storage::delete($comic->comics_img);
+        // }
+
+        $comic->delete();
+
+        //post redirect get
+        return to_route('comics.index')->with('message', 'Well done! Comic deleted successfully');
     }
 }
