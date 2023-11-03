@@ -5,7 +5,10 @@
 @section('content')
 
     <div class="container mt-5">
-        <h1 class="mb-4">Comics Admin Index</h1>
+        <h1 class="mb-4">Comics Admin Index
+            <a href="{{ route('comics.create') }}" class="btn btn-sm btn-success float-end">Create</a>
+        </h1>
+
 
         @if (session('message'))
             <div class="alert alert-success" role="alert">
@@ -52,8 +55,9 @@
                                         class="btn btn-sm btn-secondary">More</a>
                                     <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-sm btn-info">Edit</a>
 
+
                                     {{-- modal for delete button --}}
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#modalId-{{ $comic->id }}">
                                         Delete
                                     </button>
@@ -82,8 +86,11 @@
                                                     <!-- Delete form -->
                                                     <form action="{{ route('comics.destroy', $comic->id) }}"
                                                         method="POST">
+
                                                         @csrf
+
                                                         @method('DELETE')
+
                                                         <button type="submit" class="btn btn-danger">Confirm</button>
                                                     </form>
                                                 </div>

@@ -110,3 +110,5 @@ class ComicsController extends Controller
         return to_route('comics.index')->with('message', 'Well done! Comic deleted successfully');
     }
 }
+
+
