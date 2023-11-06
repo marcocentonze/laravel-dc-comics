@@ -36,21 +36,24 @@ class ComicsController extends Controller
      */
     public function store(Request $request)
     {
-        //crea un'istanza nel modello Comics
-        $new_comic = new Comics();
+        // Validazione dei dati in entrata
+        $validatedData = $request->validate([
+            'title' => 'required|bail|min:3|max:150',
+            'price' => 'required|min:3|max:7',
+            'thumb' => 'nullable|image|max:150',
+        ]);
 
-        //gestione upload immagine
+        // Gestione upload immagine
         if ($request->has('thumb')) {
-            $file_path = Storage::put('public/comics_img', $request->thumb);
-            $new_comic->thumb = $file_path;
+            $file_path = Storage::put('public/comics_img', $request->file('thumb'));
+            $validatedData['thumb'] = $file_path; // Aggiorna i dati validati con il percorso del file
         }
 
-        $new_comic->title = $request->title;
-        $new_comic->price = $request->price;
+        // Crea un nuovo fumetto con i dati validati
+        $new_comic = Comics::create($validatedData);
 
-        $new_comic->save();
-
-        return view('admin.comics.create');
+        // Reindirizza l'utente
+        return to_route('comics.index')->with('success', 'Comic created successfully!');
     }
 
     /**
@@ -75,23 +78,32 @@ class ComicsController extends Controller
      */
     public function update(Request $request, Comics $comic)
     {
-        //data raccoglie tutti i dati 
-        $data = $request->all();
+        //data raccoglie tutti i dati (non con validation però)
+        // $data = $request->all();
 
-        if ($request->has('thumb') && $comic->thumb) {
+        $validatedData = $request->validate([
+            'title' => 'required|bail|min:3|max:150',
+            'price' => 'required|min:3|max:7',
+            'thumb' => 'nullable|image|max:150',
+        ]);
 
-            $new_thumb = $request->thumb;
+        // Gestione dell'immagine caricata
+        if ($request->hasFile('thumb')) {
+            // Se esiste già un'immagine, la eliminiamo
+            if ($comic->thumb && Storage::exists($comic->thumb)) {
+                Storage::delete($comic->thumb);
+            }
 
-            Storage::delete($comic['thumb']);
-
-            $file_path = Storage::put('comics_img', $new_thumb);
-
-            $data['thumb'] = $file_path;
+            // Carica la nuova immagine e ottiene il percorso del file
+            $file_path = Storage::put('comics_img', $request->file('thumb'));
+            $validatedData['thumb'] = $file_path;
         }
 
-        $comic->update($data);
+        // Aggiorna il fumetto con i dati validati
+        $comic->update($validatedData);
 
-        return to_route('comics.show', $comic);
+        // Reindirizza l'utente 
+        return to_route('comics.show', $comic)->with('message', 'Comic updated successfully!');
     }
 
     /**
@@ -110,5 +122,3 @@ class ComicsController extends Controller
         return to_route('comics.index')->with('message', 'Well done! Comic deleted successfully');
     }
 }
-
-
